@@ -6,8 +6,8 @@ export default function App() {
   const [device, setDevice] = useState<any>(null);
 
   return device ? (
-    <ControlScreen device={device} />
-  ) : (
     <BluetoothScreen onConnected={setDevice} />
+  ) : (
+    <ControlScreen device={device} />
   );
 }

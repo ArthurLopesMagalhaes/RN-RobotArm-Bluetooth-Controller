@@ -44,10 +44,7 @@ export function BluetoothScreen({ onConnected }: Props) {
       );
     }
 
-    // Ativa o Bluetooth
     await RNBluetoothClassic.requestBluetoothEnabled();
-
-    // ... lista dispositivos
   };
 
   init();
@@ -67,32 +64,50 @@ export function BluetoothScreen({ onConnected }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dispositivos Pareados</Text>
+      <Text style={styles.title}>Dispositivos disponíveis</Text>
       <FlatList
         data={devices}
-        keyExtractor={(item) => item.address}
+        keyExtractor={item => item.address}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.deviceItem}
             onPress={() => connect(item)}
           >
-            <Text style={styles.deviceName}>{item.name}</Text>
-            <Text style={styles.deviceAddress}>{item.address}</Text>
+            <View style={styles.icon}>
+              <Text style={styles.deviceName}>🛜</Text>
+            </View>
+            <View>
+              <Text style={styles.deviceName}>{item.name}</Text>
+              <Text style={styles.deviceAddress}>{item.address}</Text>
+            </View>
           </TouchableOpacity>
         )}
       />
-      <Button title='Buscar' onPress={() => setCount((prevState) => prevState + 1)}/>
+      <Button
+        title="Buscar"
+        onPress={() => setCount(prevState => prevState + 1)}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
+  container: { flex: 1, padding: 16, backgroundColor: '#fff', marginTop: 28 },
   title: { fontSize: 22, fontWeight: 'bold', marginBottom: 16 },
   deviceItem: {
     padding: 16,
     borderBottomWidth: 1,
     borderColor: '#ccc',
+    flexDirection: 'row',
+    gap: 12,
+  },
+  icon: {
+    fontSize: 24,
+    marginRight: 12,
+    backgroundColor: '#f2e8e8',
+    borderRadius: 8,
+    padding: 12,
+    alignItems: 'center',
   },
   deviceName: { fontSize: 18 },
   deviceAddress: { fontSize: 14, color: '#666' },

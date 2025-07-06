@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, ScrollView, Button, StyleSheet } from "react-native";
+import { SafeAreaView, View, Text, ScrollView, StyleSheet } from "react-native";
 import Slider from "@react-native-community/slider";
+import { Button } from "./ui/button";
 
 type Servo = {
   name: string;
@@ -13,11 +14,10 @@ type Props = {
 
 export function ControlScreen({ device }: Props) {
   const [servos, setServos] = useState<Servo[]>([
-    { name: "Servo 1", angle: 90,  },
-    { name: "Servo 2", angle: 90,  },
-    { name: "Servo 3", angle: 90,  },
+    { name: "Servo 1", angle: 90 },
+    { name: "Servo 2", angle: 90 },
+    { name: "Servo 3", angle: 90 },
   ]);
-
 
   const sendCommand = async (cmd: string) => {
     try {
@@ -29,10 +29,11 @@ export function ControlScreen({ device }: Props) {
   };
 
   const updateServoAngle = (index: number, angle: number) => {
-    const newServos = [...servos];
-    newServos[index].angle = angle;
-    setServos(newServos);
-
+    setServos((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], angle };
+      return updated;
+    });
   };
 
   const goHome = () => {
@@ -44,21 +45,14 @@ export function ControlScreen({ device }: Props) {
   };
 
   const startMove = async () => {
-  console.log('Movimento alternado iniciado com ângulos:', servos.map(s => s.angle));
+    console.log("Movimento alternado iniciado com ângulos:", servos.map((s) => s.angle));
 
-  for (let i = 0; i < servos.length; i++) {
-    const cmd = `S${i + 1}:${servos[i].angle}`;
+    const cmd = `S:${servos.map(s => s.angle).join(',')}`;
     await sendCommand(cmd);
-    await new Promise(resolve => setTimeout(resolve, 500)); // Delay de 500ms entre os comandos
-  }
-};
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>RedNet</Text>
-      </View>
-
       <ScrollView contentContainerStyle={styles.controls}>
         {servos.map((s, i) => (
           <View key={i} style={styles.servoCard}>
@@ -70,18 +64,17 @@ export function ControlScreen({ device }: Props) {
             </View>
 
             <View style={styles.sliderContainer}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
-                <Text style={styles.value}>Angulo</Text>
+              <View style={styles.sliderInfo}>
+                <Text style={styles.value}>Ângulo</Text>
                 <Text style={styles.value}>{s.angle}°</Text>
               </View>
               <Slider
-                style={{ width: '100%' }}
+                style={styles.slider}
                 minimumValue={0}
                 maximumValue={180}
                 step={1}
                 value={s.angle}
                 onSlidingComplete={angle => updateServoAngle(i, angle)}
-
               />
             </View>
           </View>
@@ -96,34 +89,42 @@ export function ControlScreen({ device }: Props) {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
+    backgroundColor: '#f8f9fa',
+    marginTop: 28,
   },
   header: {
     padding: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#fff",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
+  },
+  sliderInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  slider: {
+    width: '100%',
   },
   headerText: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   controls: {
     padding: 16,
   },
   servoCard: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 16,
     marginBottom: 16,
     borderRadius: 12,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
@@ -131,37 +132,28 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 8,
   },
   value: {
     fontSize: 14,
     marginTop: 8,
-    textAlign: "right",
-  },
-  speedControl: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
+    textAlign: 'right',
   },
   footer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderColor: "#ddd",
-    backgroundColor: "#fff",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 24,
   },
   iconContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
     padding: 12,
     backgroundColor: '#F2E8E8',
     borderRadius: 12,
     width: 60,
-    height: 60
-
+    height: 60,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -172,5 +164,5 @@ const styles = StyleSheet.create({
   sliderContainer: {
     marginTop: 16,
     marginBottom: 24,
-  }
+  },
 });
