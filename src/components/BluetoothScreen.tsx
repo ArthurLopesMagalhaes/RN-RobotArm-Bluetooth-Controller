@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
   Alert,
   Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { requestBluetoothPermissions } from '../hooks/requestBluetoothPermission';
@@ -93,7 +93,7 @@ export function BluetoothScreen({ onConnected }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: '#fff', marginTop: 28 },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 16 },
+  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 16, color: '#000' },
   deviceItem: {
     padding: 16,
     borderBottomWidth: 1,
@@ -109,6 +109,6 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: 'center',
   },
-  deviceName: { fontSize: 18 },
+  deviceName: { fontSize: 18,  color: '#000' },
   deviceAddress: { fontSize: 14, color: '#666' },
 });

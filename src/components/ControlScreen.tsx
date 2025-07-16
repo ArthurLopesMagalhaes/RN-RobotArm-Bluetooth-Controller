@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { SafeAreaView, View, Text, ScrollView, StyleSheet } from "react-native";
 import Slider from "@react-native-community/slider";
+import React, { useState } from "react";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button } from "./ui/button";
 
 type Servo = {
@@ -103,11 +103,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderColor: '#ddd',
+     color: '#000'
   },
   sliderInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
+     color: '#000'
   },
   slider: {
     width: '100%',
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#000'
   },
   controls: {
     padding: 16,
@@ -134,11 +137,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 8,
+    color: '#000'
   },
   value: {
     fontSize: 14,
     marginTop: 8,
     textAlign: 'right',
+    color: '#000'
   },
   footer: {
     flexDirection: 'row',
