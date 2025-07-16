@@ -43,6 +43,17 @@ Conexões principais:
    <img src="https://github.com/ArthurLopesMagalhaes/RN-RobotArm-Bluetooth-Controller/blob/main/arduino.jpeg?raw=true" width="250" />
 </p>
 
+## 📟 Código Arduino (C++)
+
+O código embarcado foi escrito em C++ e carregado no **Arduino UNO**. Ele é responsável por:
+
+- Receber comandos via **Bluetooth** do app mobile.
+- Interpretar os comandos recebidos (por exemplo, `S1:120` para servo 1 com 120 graus).
+- Controlar os **servomotores** nos respectivos ângulos.
+
+O código pode ser encontrado no arquivo `arduino.cpp`:
+
+
 ## 💡 Como usar
 
 1. **Clone este repositório**:
@@ -66,6 +77,9 @@ Conexões principais:
 5. **Abra o app, selecione o dispositivo HC-05 (senha padrão: 1234 ou 0000)**:
 
 ## 📷 Demonstração
+
+https://github.com/user-attachments/assets/a2c4861b-c4f0-45b4-b7c4-ded6b9082282
+
 
 ## 🧠 Tecnologias Utilizadas
 
