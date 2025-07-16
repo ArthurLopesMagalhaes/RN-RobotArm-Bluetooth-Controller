@@ -1,97 +1,77 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🤖 RN-RobotArm-Bluetooth-Controller
 
-# Getting Started
+Aplicativo mobile desenvolvido em **React Native** para controlar um **braço robótico** impresso em 3D, utilizando comunicação **Bluetooth** com o módulo **HC-05** conectado a um **Arduino UNO**. O projeto foi desenvolvido como parte de um trabalho acadêmico da disciplina de Robótica Industrial, com o objetivo de simular o processo de **soldagem automatizada com manipulador antropomórfico**.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 📱 Funcionalidades do App
 
-## Step 1: Start Metro
+- Controle individual de **3 servomotores** via sliders, representando os eixos do braço robótico.
+- Exibição em tempo real do **ângulo de cada servo** (0° a 180°).
+- Conexão Bluetooth com dispositivos disponíveis (ex: HC-05).
+- Interface intuitiva e responsiva, ideal para testes em campo ou demonstrações.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+<p align="center">
+ 
+  <img src="https://github.com/ArthurLopesMagalhaes/RN-RobotArm-Bluetooth-Controller/blob/main/screen2.jpeg?raw=true" width="250" />
+  <img src="https://github.com/ArthurLopesMagalhaes/RN-RobotArm-Bluetooth-Controller/blob/main/screen1.jpeg?raw=true" width="250" />
+</p>
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## 🤖 Estrutura do Robô
 
-```sh
-# Using npm
-npm start
+- Braço robótico com 3 DOF (graus de liberdade).
+- Estrutura impressa em **3D**.
+- Servomotores posicionados para simular o movimento de um braço humano.
+- Controle alternativo via **potenciômetros**, permitindo comparação entre métodos de controle.
 
-# OR using Yarn
-yarn start
-```
+<p align="center">
+  <img src="https://github.com/ArthurLopesMagalhaes/RN-RobotArm-Bluetooth-Controller/blob/main/assets/screenshots/robot_arm.png" width="300" />
+</p>
 
-## Step 2: Build and run your app
+## 🔌 Montagem Eletrônica
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+- **Arduino UNO**
+- **Módulo Bluetooth HC-05**
+- **3 Servomotores**
+- **Protoboard e jumpers**
 
-### Android
+Conexões principais:
 
-```sh
-# Using npm
-npm run android
+- HC-05 TX ➝ Arduino RX (pino 10)
+- HC-05 RX ➝ Arduino TX (pino 11) (com divisor de tensão)
+- Servos conectados aos pinos digitais (ex: 9, 10 e 11)
 
-# OR using Yarn
-yarn android
-```
+<p align="center">
+   <img src="https://github.com/ArthurLopesMagalhaes/RN-RobotArm-Bluetooth-Controller/blob/main/arduino.jpeg?raw=true" width="250" />
+</p>
 
-### iOS
+## 💡 Como usar
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+1. **Clone este repositório**:
+   ```bash
+   git clone https://github.com/ArthurLopesMagalhaes/RN-RobotArm-Bluetooth-Controller.git
+   ```
+2. **Instale as dependências**:
+   ```bash
+    cd RN-RobotArm-Bluetooth-Controller
+    npm install
+   ```
+3. **Rode no seu dispositivo Android**:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+   ```bash
+   npm start
+   npm run android
+   ```
 
-```sh
-bundle install
-```
+4. **Emparelhe seu HC-05 com o celular**
 
-Then, and every time you update your native dependencies, run:
+5. **Abra o app, selecione o dispositivo HC-05 (senha padrão: 1234 ou 0000)**:
 
-```sh
-bundle exec pod install
-```
+## 📷 Demonstração
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## 🧠 Tecnologias Utilizadas
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- **React Native**
+- **react-native-bluetooth-classic**
+- **Arduino C++**
+- **HC-05 Bluetooth Module**
+- **Servomotores SG90**
+- **Impressão 3D (PLA)**
